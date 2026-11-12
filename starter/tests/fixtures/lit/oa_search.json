@@ -1,0 +1,472 @@
+{
+ "meta": {
+  "count": 210272,
+  "db_response_time_ms": 88,
+  "page": 1,
+  "per_page": 5,
+  "groups_count": null,
+  "x_query": {
+   "oql": "works where full text has (information relaxations duality)",
+   "oqo": {
+    "get_rows": "works",
+    "filter_rows": [
+     {
+      "column_id": "fulltext.search",
+      "value": "information relaxations duality",
+      "operator": "has"
+     }
+    ]
+   },
+   "url": "/works?filter=fulltext.search:information relaxations duality&per_page=5"
+  },
+  "cost_usd": 0.001
+ },
+ "results": [
+  {
+   "id": "https://openalex.org/W2154463167",
+   "doi": "https://doi.org/10.1287/opre.2014.1322",
+   "display_name": "Information Relaxations, Duality, and Convex Stochastic Dynamic Programs",
+   "publication_year": 2014,
+   "cited_by_count": 63,
+   "open_access": {
+    "is_oa": false,
+    "oa_status": "closed",
+    "oa_url": null,
+    "any_repository_has_fulltext": false
+   },
+   "primary_location": {
+    "id": "doi:10.1287/opre.2014.1322",
+    "is_oa": false,
+    "landing_page_url": "https://doi.org/10.1287/opre.2014.1322",
+    "pdf_url": null,
+    "source": {
+     "id": "https://openalex.org/S125775545",
+     "display_name": "Operations Research",
+     "issn_l": "0030-364X",
+     "issn": [
+      "0030-364X",
+      "1526-5463"
+     ],
+     "is_oa": false,
+     "is_in_doaj": false,
+     "is_core": true,
+     "listed_in": [
+      "abdc-a-star",
+      "cwts-core",
+      "jufo-3",
+      "norway-2"
+     ],
+     "host_organization": "https://openalex.org/P4310315699",
+     "host_organization_name": "Institute for Operations Research and the Management Sciences",
+     "host_organization_lineage": [
+      "https://openalex.org/P4310315699"
+     ],
+     "host_organization_lineage_names": [
+      "Institute for Operations Research and the Management Sciences"
+     ],
+     "type": "journal"
+    },
+    "license": null,
+    "license_id": null,
+    "version": "publishedVersion",
+    "is_accepted": true,
+    "is_published": true,
+    "raw_source_name": "Operations Research",
+    "raw_type": "journal-article"
+   },
+   "authorships": [
+    {
+     "author_position": "first",
+     "author": {
+      "id": "https://openalex.org/A5062612627",
+      "display_name": "David B. Brown",
+      "orcid": "https://orcid.org/0000-0002-5458-9098",
+      "observed_orcids": [
+       "https://orcid.org/0000-0002-5458-9098"
+      ]
+     },
+     "institutions": [
+      {
+       "id": "https://openalex.org/I170897317",
+       "display_name": "Duke University",
+       "ror": "https://ror.org/00py81415",
+       "country_code": "US",
+       "type": "education",
+       "lineage": [
+        "https://openalex.org/I170897317"
+       ]
+      }
+     ],
+     "countries": [
+      "US"
+     ],
+     "is_corresponding": false,
+     "raw_author_name": "David B. Brown",
+     "raw_affiliation_strings": [
+      "Fuqua School of Business, Duke University, Durham, North Carolina 27708"
+     ],
+     "raw_orcid": null,
+     "affiliations": [
+      {
+       "raw_affiliation_string": "Fuqua School of Business, Duke University, Durham, North Carolina 27708",
+       "institution_ids": [
+        "https://openalex.org/I170897317"
+       ]
+      }
+     ]
+    },
+    {
+     "author_position": "last",
+     "author": {
+      "id": "https://openalex.org/A5101517558",
+      "display_name": "James E. Smith",
+      "orcid": "https://orcid.org/0000-0002-9429-7567",
+      "observed_orcids": [
+       "https://orcid.org/0000-0002-9429-7567"
+      ]
+     },
+     "institutions": [
+      {
+       "id": "https://openalex.org/I170897317",
+       "display_name": "Duke University",
+       "ror": "https://ror.org/00py81415",
+       "country_code": "US",
+       "type": "education",
+       "lineage": [
+        "https://openalex.org/I170897317"
+       ]
+      }
+     ],
+     "countries": [
+      "US"
+     ],
+     "is_corresponding": false,
+     "raw_author_name": "James E. Smith",
+     "raw_affiliation_strings": [
+      "Fuqua School of Business, Duke University, Durham, North Carolina 27708"
+     ],
+     "raw_orcid": null,
+     "affiliations": [
+      {
+       "raw_affiliation_string": "Fuqua School of Business, Duke University, Durham, North Carolina 27708",
+       "institution_ids": [
+        "https://openalex.org/I170897317"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "https://openalex.org/W2151786492",
+   "doi": "https://doi.org/10.1287/opre.1090.0796",
+   "display_name": "Information Relaxations and Duality in Stochastic Dynamic Programs",
+   "publication_year": 2010,
+   "cited_by_count": 245,
+   "open_access": {
+    "is_oa": true,
+    "oa_status": "green",
+    "oa_url": "http://hdl.handle.net/10161/4435",
+    "any_repository_has_fulltext": true
+   },
+   "primary_location": {
+    "id": "doi:10.1287/opre.1090.0796",
+    "is_oa": false,
+    "landing_page_url": "https://doi.org/10.1287/opre.1090.0796",
+    "pdf_url": null,
+    "source": {
+     "id": "https://openalex.org/S125775545",
+     "display_name": "Operations Research",
+     "issn_l": "0030-364X",
+     "issn": [
+      "0030-364X",
+      "1526-5463"
+     ],
+     "is_oa": false,
+     "is_in_doaj": false,
+     "is_core": true,
+     "listed_in": [
+      "abdc-a-star",
+      "cwts-core",
+      "jufo-3",
+      "norway-2"
+     ],
+     "host_organization": "https://openalex.org/P4310315699",
+     "host_organization_name": "Institute for Operations Research and the Management Sciences",
+     "host_organization_lineage": [
+      "https://openalex.org/P4310315699"
+     ],
+     "host_organization_lineage_names": [
+      "Institute for Operations Research and the Management Sciences"
+     ],
+     "type": "journal"
+    },
+    "license": null,
+    "license_id": null,
+    "version": "publishedVersion",
+    "is_accepted": true,
+    "is_published": true,
+    "raw_source_name": "Operations Research",
+    "raw_type": "journal-article"
+   },
+   "authorships": [
+    {
+     "author_position": "first",
+     "author": {
+      "id": "https://openalex.org/A5062612627",
+      "display_name": "David B. Brown",
+      "orcid": "https://orcid.org/0000-0002-5458-9098",
+      "observed_orcids": [
+       "https://orcid.org/0000-0002-5458-9098"
+      ]
+     },
+     "institutions": [
+      {
+       "id": "https://openalex.org/I170897317",
+       "display_name": "Duke University",
+       "ror": "https://ror.org/00py81415",
+       "country_code": "US",
+       "type": "education",
+       "lineage": [
+        "https://openalex.org/I170897317"
+       ]
+      }
+     ],
+     "countries": [
+      "US"
+     ],
+     "is_corresponding": false,
+     "raw_author_name": "David B. Brown",
+     "raw_affiliation_strings": [
+      "Fuqua School of Business, Duke University, Durham, North Carolina 27708"
+     ],
+     "raw_orcid": null,
+     "affiliations": [
+      {
+       "raw_affiliation_string": "Fuqua School of Business, Duke University, Durham, North Carolina 27708",
+       "institution_ids": [
+        "https://openalex.org/I170897317"
+       ]
+      }
+     ]
+    },
+    {
+     "author_position": "middle",
+     "author": {
+      "id": "https://openalex.org/A5101517558",
+      "display_name": "James E. Smith",
+      "orcid": "https://orcid.org/0000-0002-9429-7567",
+      "observed_orcids": [
+       "https://orcid.org/0000-0002-9429-7567"
+      ]
+     },
+     "institutions": [
+      {
+       "id": "https://openalex.org/I170897317",
+       "display_name": "Duke University",
+       "ror": "https://ror.org/00py81415",
+       "country_code": "US",
+       "type": "education",
+       "lineage": [
+        "https://openalex.org/I170897317"
+       ]
+      }
+     ],
+     "countries": [
+      "US"
+     ],
+     "is_corresponding": false,
+     "raw_author_name": "James E. Smith",
+     "raw_affiliation_strings": [
+      "Fuqua School of Business, Duke University, Durham, North Carolina 27708"
+     ],
+     "raw_orcid": null,
+     "affiliations": [
+      {
+       "raw_affiliation_string": "Fuqua School of Business, Duke University, Durham, North Carolina 27708",
+       "institution_ids": [
+        "https://openalex.org/I170897317"
+       ]
+      }
+     ]
+    },
+    {
+     "author_position": "last",
+     "author": {
+      "id": "https://openalex.org/A5073431048",
+      "display_name": "Peng Sun",
+      "orcid": "https://orcid.org/0000-0002-3892-5936",
+      "observed_orcids": [
+       "https://orcid.org/0000-0002-3892-5936"
+      ]
+     },
+     "institutions": [
+      {
+       "id": "https://openalex.org/I170897317",
+       "display_name": "Duke University",
+       "ror": "https://ror.org/00py81415",
+       "country_code": "US",
+       "type": "education",
+       "lineage": [
+        "https://openalex.org/I170897317"
+       ]
+      }
+     ],
+     "countries": [
+      "US"
+     ],
+     "is_corresponding": false,
+     "raw_author_name": "Peng Sun",
+     "raw_affiliation_strings": [
+      "Fuqua School of Business, Duke University, Durham, North Carolina 27708"
+     ],
+     "raw_orcid": null,
+     "affiliations": [
+      {
+       "raw_affiliation_string": "Fuqua School of Business, Duke University, Durham, North Carolina 27708",
+       "institution_ids": [
+        "https://openalex.org/I170897317"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "https://openalex.org/W2611766878",
+   "doi": "https://doi.org/10.1287/opre.2018.1782",
+   "display_name": "Approximations to Stochastic Dynamic Programs via Information Relaxation Duality",
+   "publication_year": 2019,
+   "cited_by_count": 22,
+   "open_access": {
+    "is_oa": false,
+    "oa_status": "closed",
+    "oa_url": null,
+    "any_repository_has_fulltext": false
+   },
+   "primary_location": {
+    "id": "doi:10.1287/opre.2018.1782",
+    "is_oa": false,
+    "landing_page_url": "https://doi.org/10.1287/opre.2018.1782",
+    "pdf_url": null,
+    "source": {
+     "id": "https://openalex.org/S125775545",
+     "display_name": "Operations Research",
+     "issn_l": "0030-364X",
+     "issn": [
+      "0030-364X",
+      "1526-5463"
+     ],
+     "is_oa": false,
+     "is_in_doaj": false,
+     "is_core": true,
+     "listed_in": [
+      "abdc-a-star",
+      "cwts-core",
+      "jufo-3",
+      "norway-2"
+     ],
+     "host_organization": "https://openalex.org/P4310315699",
+     "host_organization_name": "Institute for Operations Research and the Management Sciences",
+     "host_organization_lineage": [
+      "https://openalex.org/P4310315699"
+     ],
+     "host_organization_lineage_names": [
+      "Institute for Operations Research and the Management Sciences"
+     ],
+     "type": "journal"
+    },
+    "license": null,
+    "license_id": null,
+    "version": "publishedVersion",
+    "is_accepted": true,
+    "is_published": true,
+    "raw_source_name": "Operations Research",
+    "raw_type": "journal-article"
+   },
+   "authorships": [
+    {
+     "author_position": "first",
+     "author": {
+      "id": "https://openalex.org/A5038549642",
+      "display_name": "Santiago Balseiro",
+      "orcid": "https://orcid.org/0000-0002-0012-3292",
+      "observed_orcids": [
+       "https://orcid.org/0000-0002-0012-3292"
+      ]
+     },
+     "institutions": [
+      {
+       "id": "https://openalex.org/I78577930",
+       "display_name": "Columbia University",
+       "ror": "https://ror.org/00hj8s172",
+       "country_code": "US",
+       "type": "education",
+       "lineage": [
+        "https://openalex.org/I78577930"
+       ]
+      }
+     ],
+     "countries": [
+      "US"
+     ],
+     "is_corresponding": false,
+     "raw_author_name": "Santiago R. Balseiro",
+     "raw_affiliation_strings": [
+      "Graduate School of Business, Columbia University;"
+     ],
+     "raw_orcid": "https://orcid.org/0000-0002-0012-3292",
+     "affiliations": [
+      {
+       "raw_affiliation_string": "Graduate School of Business, Columbia University;",
+       "institution_ids": [
+        "https://openalex.org/I78577930"
+       ]
+      }
+     ]
+    },
+    {
+     "author_position": "last",
+     "author": {
+      "id": "https://openalex.org/A5062612627",
+      "display_name": "David B. Brown",
+      "orcid": "https://orcid.org/0000-0002-5458-9098",
+      "observed_orcids": [
+       "https://orcid.org/0000-0002-5458-9098"
+      ]
+     },
+     "institutions": [
+      {
+       "id": "https://openalex.org/I170897317",
+       "display_name": "Duke University",
+       "ror": "https://ror.org/00py81415",
+       "country_code": "US",
+       "type": "education",
+       "lineage": [
+        "https://openalex.org/I170897317"
+       ]
+      }
+     ],
+     "countries": [
+      "US"
+     ],
+     "is_corresponding": true,
+     "raw_author_name": "David B. Brown",
+     "raw_affiliation_strings": [
+      "Fuqua School of Business, Duke University, Durham, North Carolina 27708"
+     ],
+     "raw_orcid": "https://orcid.org/0000-0002-5458-9098",
+     "affiliations": [
+      {
+       "raw_affiliation_string": "Fuqua School of Business, Duke University, Durham, North Carolina 27708",
+       "institution_ids": [
+        "https://openalex.org/I170897317"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "group_by": []
+}

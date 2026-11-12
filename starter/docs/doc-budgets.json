@@ -1,0 +1,67 @@
+{
+  "line_limit_chars": 400,
+  "boot_path_total_words": 20000,
+  "claude_h1_block_words": 350,
+  "roadmap_status_paragraph_words": 40,
+  "design_header_words": 250,
+  "inactive_header_allowance_words": 100,
+  "memory_index_chars": 2500,
+  "files": {
+    "CLAUDE.md": {
+      "baseline_words": 759,
+      "rest_words": 900,
+      "item_sections": {
+        "## Doc map": {
+          "item": "table row",
+          "max_words": 30
+        },
+        "## Load-bearing facts": {
+          "item": "top-level bullet",
+          "max_words": 200
+        }
+      },
+      "target_from": "adoption",
+      "active": true
+    },
+    "docs/roadmap.md": {
+      "baseline_words": 492,
+      "rest_words": 1200,
+      "item_sections": {
+        "## Items": {
+          "item": "entry",
+          "max_words": 200
+        },
+        "## Parking lot": {
+          "item": "top-level bullet",
+          "max_words": 200
+        },
+        "## Standing decisions": {
+          "item": "top-level bullet",
+          "max_words": 200
+        }
+      },
+      "target_from": "adoption",
+      "active": true
+    },
+    "docs/process.md": {
+      "baseline_words": 10068,
+      "target_words": 10500,
+      "target_from": "adoption",
+      "active": true
+    },
+    "AGENTS.md": {
+      "baseline_words": 1053,
+      "target_words": 2000,
+      "target_from": "adoption",
+      "active": true
+    },
+    "README.md": {
+      "baseline_words": 221,
+      "target_words": 700,
+      "target_from": "adoption",
+      "active": true
+    }
+  },
+  "design_headers": {},
+  "record_dead_links": []
+}

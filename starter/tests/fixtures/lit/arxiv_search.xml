@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/rCWPCgvgFRFswe/jCbXxG/Udc3I</id>
+  <title>arXiv Query: search_query=ti:"policy extraction"&amp;id_list=&amp;start=0&amp;max_results=2</title>
+  <updated>2026-10-03T01:06:24Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=ti:%22policy+extraction%22&amp;start=0&amp;max_results=2&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>2</opensearch:itemsPerPage>
+  <opensearch:totalResults>9</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1805.08328v2</id>
+    <title>Verifiable Reinforcement Learning via Policy Extraction</title>
+    <updated>2019-01-24T02:53:31Z</updated>
+    <link href="https://arxiv.org/abs/1805.08328v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1805.08328v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>While deep reinforcement learning has successfully solved many challenging control tasks, its real-world applicability has been limited by the inability to ensure the safety of learned policies. We propose an approach to verifiable reinforcement learning by training decision tree policies, which can represent complex policies (since they are nonparametric), yet can be efficiently verified using existing techniques (since they are highly structured). The challenge is that decision tree policies are difficult to train. We propose VIPER, an algorithm that combines ideas from model compression and imitation learning to learn decision tree policies guided by a DNN policy (called the oracle) and its Q-function, and show that it substantially outperforms two baselines. We use VIPER to (i) learn a provably robust decision tree policy for a variant of Atari Pong with a symbolic state space, (ii) learn a decision tree policy for a toy game based on Pong that provably never loses, and (iii) learn a provably stable decision tree policy for cart-pole. In each case, the decision tree policy achieves performance equal to that of the original DNN policy.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-05-22T00:14:32Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Osbert Bastani</name>
+    </author>
+    <author>
+      <name>Yewen Pu</name>
+    </author>
+    <author>
+      <name>Armando Solar-Lezama</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.20909v1</id>
+    <title>Decoupling Policy Extraction for Offline Reinforcement Learning</title>
+    <updated>2026-08-21T09:26:53Z</updated>
+    <link href="https://arxiv.org/abs/2608.20909v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.20909v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Offline RL methods commonly jointly train the actor and critic, where the critic is used to guide the actor toward higher-value actions. This coupled learning process is well motivated in online RL, where an improved actor collects new data that can further update the actor and the critic. However, training data remains fixed in offline RL, making actor-side policy improvement unable to generate new data to validate or correct the critic. Moreover, retaining this coupled paradigm leads to two related challenges. Firstly, actor updates can drift toward high-valued but potentially out-of-distribution (OOD) actions and amplify critic overestimation. Secondly, conservative value estimation or behavior-cloning regularization creates a difficult trade-off between suppressing OOD actions and selecting high-value actions within the data-supported region. Motivated by this observation, we revisit the conventional offline RL paradigm and propose decoupling policy improvement from actor training. Specifically, we train the actor solely to model the behavior distribution and perform policy improvement at inference time by reranking multiple actor-generated proposals with a separately learned critic. We refer to this paradigm as the decoupled policy extraction paradigm. Under such paradigm, the actor provides behavior-supported action candidates, while the critic performs value-based selection within this candidate set. Extensive experiments show that the decoupled policy extraction paradigm outperforms both behavior cloning and jointly learned offline RL methods, while remaining effective even with a naive Q-learning critic.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-21T09:26:53Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Xuyao Lin</name>
+    </author>
+    <author>
+      <name>Yixiang Shan</name>
+    </author>
+    <author>
+      <name>Jinru Duan</name>
+    </author>
+    <author>
+      <name>Tao Yang</name>
+    </author>
+    <author>
+      <name>Xinyu Zhao</name>
+    </author>
+    <author>
+      <name>Runyu Lei</name>
+    </author>
+    <author>
+      <name>Yiming Zhao</name>
+    </author>
+    <author>
+      <name>Jiaxin Fan</name>
+    </author>
+    <author>
+      <name>Zongbao Feng</name>
+    </author>
+    <author>
+      <name>Peng Jia</name>
+    </author>
+  </entry>
+</feed>

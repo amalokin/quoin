@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><script id="anubis_version" type="application/json">"v1.26.4"
+</script><script id="anubis_challenge" type="application/json">{"rules":{"algorithm":"fast","difficulty":4},"challenge":{"issuedAt":"2026-10-03T01:05:52.698434762Z","metadata":{"User-Agent":"example-lit/0.1 (+https://example.org/example; mailto:contact)","X-Real-Ip":"203.0.113.7"},"id":"01a0ff4b-cc3a-768e-9e95-da840a76d9fd","method":"fast","randomData":"4a6684c4c0a720cdef0026516cdfc7bfe732fb3584c3647177428c2e49b0f0cedf0231df3f902e72d31fda241a74411ade48eaff93aaed402f0f434759993732","policyRuleHash":"5b699ef8e5d00f7d","difficulty":4,"spent":false}}
+</script><script id="anubis_base_prefix" type="application/json">""
+</script><script id="anubis_public_url" type="application/json">""
+</script><link rel="stylesheet" href="/.within.website/x/cmd/anubis/static/css/anubis.css" type="text/css" />
+    <link rel="stylesheet" href="/.within.website/x/cmd/anubis/static/css/custom.css?v=1.0.0" type="text/css" />
+  </head>
+  <body>
+    <header>
+      <img id="logo" src="/.within.website/x/cmd/anubis/static/img/logo.png" alt="Duke University Libraries">
+    </header>
+    <main>
+      <h1 id="title" class="centered-div">Making sure you&#39;re not a bot!</h1>
+      <div class="centered-div">
+	<img id="image" style="width: 100%; max-width: 256px;" alt="Library Blue Devil figure" src="/.within.website/x/cmd/anubis/static/img/devil.webp">
+      </div><div class="centered-div"><p id="status">Loading...</p><p id="anubis-script-error" style="display:none;">Anubis could not load its JavaScript. The server may be overloaded. Please reload the page to try again.</p><script id="anubis-main" defer type="module" src="/.within.website/x/cmd/anubis/static/js/main.mjs?cacheBuster=v1.26.4"></script><script>/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this page.
+
+Copyright (c) 2026 Xe Iaso <address removed>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+@licend  The above is the entire license notice
+for the JavaScript code in this page.
+
+## Rationale
+
+This script catches `main.mjs` failing to load and re-injects it with
+jittered exponential backoff.
+
+Without this any failures loading `main.mjs` leaves the challenge page
+sitting on the "Loading..." message forever with no error messaging
+outside of the browser console, which is unavailable on mobile browsers.
+
+Disable loading this script at your peril. You have been warned.
+*/
+(()=>{var f=(e,t=750,n=1e4)=>Math.random()*Math.min(n,t*Math.pow(e,2));var d=(e,t={},n=[])=>{let s=typeof e=="function"?e(t):Object.assign(document.createElement(e),t);return Array.isArray(n)||(n=[n]),s.append(...n),s};var i=e=>document.getElementById(e);var _=e=>e.map(i);(()=>{let e=i("anubis-main");if(!e){console.debug("can't find anubis main.mjs element via ID `anubis-main`, bailing");return}let t=e.getAttribute("src");if(!t){console.debug("can't find src attribute of script element `anubis-main`, bailing");return}let n=t.indexOf("?")===-1?"?":"&",s=4,E=750,A=1e4,c=1e4,a=0,l=0,u=()=>window.__anubisBooted===!0,p=()=>{let r=_(["anubis-script-error","status","progress"]);if(r.filter(D=>D==null).length!==0){console.debug("missing one of the following elements: anubis-script-error, status, progress. cannot proceed, bailing.");return}let[o,M,T]=r;o.style.display="block",M.style.display="none",T.style.display="none"},m=r=>()=>{if(u()||r!==l)return;if(l++,a++,a>s){p();return}let o=f(a,E,A);setTimeout(y,o)},y=()=>{if(u())return;let r=m(l),o=d("script",{async:!0,type:"module",src:t+n+"anubisRetry="+a,onerror:r});document.head.appendChild(o),setTimeout(r,c)},b=m(0);e.onerror=b,setTimeout(b,c)})();})();
+</script><div id="progress" role="progressbar" aria-labelledby="status"><div class="bar-inner"></div></div><div id="testarea"></div></div></main>
+    <footer>
+      <h2>Trouble getting through?</h2>
+      <p>
+	<a href="https://duke.qualtrics.com/jfe/form/SV_4UboCPmXUmtIfxs" target="_blank" rel="noopener">Help - I'm not a bot!</a>
+      </p>
+    </footer>
+  </body>
+</html>

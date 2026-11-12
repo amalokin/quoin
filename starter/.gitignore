@@ -1,0 +1,12 @@
+# The sessions' local state: the subagent-driven development ledgers, the owner's local prompts, the session worktrees
+.superpowers/
+/local/
+.claude/worktrees/
+
+# Environments, caches and editor files
+.venv/
+__pycache__/
+.pytest_cache/
+.DS_Store
+
+# {{PROJECT}}: the project's own entries below
