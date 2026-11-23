@@ -30,7 +30,7 @@ End by opening the planning PR; dispatch no implementers and write no code or te
 
 ## The planning PR
 
-Carry in it the plan with its row in `docs/plans/README.md`, the design doc with its rulings and gate rows, the roadmap's status paragraph set to planned with the plan's path, and the updated "Now and next" and CLAUDE.md Status naming the next session; once the PR is open, write its number at the status sites and in the plan's index row by one more commit (process.md §II, the hard stop and stage 7).
+Carry in it the plan with its row in `docs/plans/README.md`, the design doc with its rulings and gate rows, its Active obligations as the PR opens or closes them and its series' rows in `docs/id-registry.md`, the roadmap's status paragraph set to planned with the plan's path and the entry's Design line linking the plan, and the updated "Now and next" and CLAUDE.md Status naming the next session; once the PR is open, write its number at the status sites and in the plan's index row by one more commit (process.md §II, the hard stop and stage 7).
 
 ## The planning PR's description
 

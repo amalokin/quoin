@@ -61,12 +61,14 @@ findings' dispositions, fix waves, re-reviews, status and PR rows, seat logs and
 once the wave is closed: merged, and no pending session names its rows. A pending session is one "Now and next" lists,
 and it names a row when its spec — the roadmap bullet, a design's Active obligations, a plan, or the owner's prompt as
 it stands or as a proposal re-points it — cites the row by id, date or title; a PR that moves a named row and
-re-points that spec in the same PR may move it. Each row moves verbatim with its date and position, never renumbered.
-A ruling that binds later work — a standing exception, a pinned fact, a pre-registration, an open obligation — stays
-whatever the title of the row that holds it: such a mixed row is split by function, the original moving whole and the
-design keeping an excerpt row of the same date titled "(excerpt of the row '‹the row key›' — the original verbatim in
-the companion log)"; a row whose title names neither class stays. A log row is never edited: a ruling later overturned
-gets a new dated row appended at the end; "rewritten in place" (§Canonical and pointer sites) is for the body.
+re-points that spec in the same PR may move it. The PR whose merge closes the wave hands the move on in the design's
+Active obligations, and the next PR that touches the design makes it. Each row moves verbatim with its date and
+position, never renumbered. A ruling that binds later work — a standing exception, a pinned fact, a pre-registration,
+an open obligation — stays whatever the title of the row that holds it: such a mixed row is split by function, the
+original moving whole and the design keeping an excerpt row of the same date titled "(excerpt of the row '‹the row
+key›' — the original verbatim in the companion log)"; a row whose title names neither class stays. A log row is never
+edited: a ruling later overturned gets a new dated row appended at the end; "rewritten in place" (§Canonical and
+pointer sites) is for the body.
 
 ### II. The loop — one item, two sessions
 
@@ -122,8 +124,10 @@ is the owner's). The operating detail is [docs/runbooks/worktree-sessions.md](ru
    adjudicate with data or logic escalate to the owner.
 
 **Hard stop.** The planning session ends by opening the **planning PR**: the plan with its row in the plans index
-([docs/plans/README.md](plans/README.md); §Doc taxonomy, the Plan row), the design doc with its rulings and gate rows, the roadmap's
-status paragraph set to *planned* with the plan's path, and the queue's update — "Now and next" and CLAUDE.md's Status
+([docs/plans/README.md](plans/README.md); §Doc taxonomy, the Plan row), the design doc with its rulings and gate rows,
+its Active obligations as the PR opens or closes them (§I) and its series' rows in the id registry
+([docs/id-registry.md](id-registry.md)), the roadmap's status paragraph set to *planned* with the plan's path and the
+entry's Design line linking the plan, and the queue's update — "Now and next" and CLAUDE.md's Status
 naming the next session (§Roadmap upkeep). The PR's number follows at the status sites and in the plan's index row, by
 one more commit (stage 7). The description lists the rulings made in the owner's place and the questions only the
 owner can answer. The session dispatches no implementers and writes no code or tests for the item.
@@ -169,16 +173,19 @@ branch `feature/<slug>` off `origin/main`.
    CLAUDE.md's Status, each within its budget (§Budgets): the previous text leaves, what it said lives in the report or
    the log, and every figure cut from a status site is grepped at its canonical home first and migrated there
    verbatim, with its label, if absent. The same PR updates the design's Active obligations (resolved items leave, new
-   ones enter) and records what it hands on in the report's open-items section — every deferred minor by file and
-   symbol, with a destination and a fallback, routed to the next item if logical and to the later one otherwise (a
-   parking-lot bullet where none exists), none lost, never only in the SDD ledger. A status site carries "PR #N" and the
-   PR's own date (the day it is cut) and states the result the merge makes true — "merged" is written in the PR, since
-   the text reaches `main` only if the PR merges — never a merge SHA, a merge date or a branch name: git records the
-   merge. The number is written once the PR is open, by one more commit on the branch. A docs-only PR after a merge is
-   for a real post-merge event (a handoff's results, a ruling that changes a rule), never for stamping. The PR
-   description, like every report to the owner, leads with the high-level layer — done, results, recommendations, the
-   ask — with the detail behind it, in plain words: no internal labels or ruling ids in the top layer, and each ask says
-   what is needed, why and by when. Review comments are addressed in-PR until approval.
+   ones enter), links the report on the roadmap entry's Design line beside the plan's and records what it hands on in
+   the report's open-items section — every deferred minor by file and symbol, with a destination and a fallback,
+   routed to the next item if logical and to the later one otherwise (a parking-lot bullet where none exists), none
+   lost, never only in the SDD ledger. A status site carries "PR #N" and the PR's own date (the day it is cut) and
+   states the result the merge makes true — "merged" is written in the PR, since the text reaches `main` only if the PR
+   merges — never a merge SHA, a merge date or a branch name: git records the merge. The number is written once the PR
+   is open, by one more commit on the branch; until then the status sites, the plan's index row and the banners carry
+   the lower-case placeholder `#n`, which that commit fills, and `git grep -w '#n'` outside this document finds one
+   left. A docs-only PR after a merge is for a real post-merge event (a handoff's results, a ruling that changes a
+   rule), never for stamping. The PR description, like every report to the owner, leads with the high-level layer —
+   done, results, recommendations, the ask — with the detail behind it, in plain words: no internal labels or ruling ids
+   in the top layer, and each ask says what is needed, why and by when. Review comments are addressed in-PR until
+   approval.
 8. **Post-merge.** Any leftover tasks completed or filed as roadmap entries. The session confirms the merge as
    §Conventions' merge-method row says, copies the SDD workspace from the worktree into the main checkout's
    `.superpowers/sdd/`, then removes the worktree (`git worktree remove`) and deletes the merged branch, local and
@@ -249,8 +256,9 @@ orchestrator did inline that belonged in the loop is declared as such in its PR 
 - **Document-review variant.** The same gate reviews prose — design docs, explainers, this document; the focus text
   names the questions the document must survive.
 - **Judging.** The orchestrator is the judge, not a stenographer. Each finding → *incorporated* (with the change) or
-  *dismissed* (with data or logic), logged in the design doc's decision-log table. A finding that survives two rounds
-  of disagreement between orchestrator and reviewer, and is material, goes to the owner.
+  *dismissed* (with data or logic; for a finding left for later, as [the gate transitions](#the-gate-transitions) say),
+  logged in the design doc's decision-log table. A finding that survives two rounds of disagreement between
+  orchestrator and reviewer, and is material, goes to the owner.
 - The review is **advisory input to the orchestrator**, never an auto-apply. Superpowers' own reviewers (the SDD spec
   and quality reviewers, `requesting-code-review`) remain the per-task inner loop; the gates are the outer loop at
   stages 4 and 6.
@@ -262,17 +270,17 @@ the Model policy's cap cite this table instead of restating it.
 
 | Event | What follows |
 |---|---|
-| The gate returns findings | each ruled incorporated or dismissed in the decision log; the fix wave is normal commits |
+| The gate returns findings | each ruled incorporated or dismissed in the decision log (a finding left for later is dismissed for the round, its destination named); the fix wave is normal commits |
 | A fix wave that changes substance — a rule, a decision, an acceptance criterion, a gate, a tolerance, an interface or code behaviour, in any file — with rounds left under the cap | one more gate round on the wave (`--base` the previous round's commit); substance takes precedence over file type |
-| A fix wave that changes no substance — wording, status sites, links, formatting — whatever the file | a scoped re-review by an implementation-class subagent, at the implementation orchestrator's model (the binding table); no gate round |
+| A fix wave that changes no substance — wording, status sites, links, formatting — whatever the file | a scoped re-review (it receives the findings, their rulings and the wave's diff, and returns each finding addressed or not and any new breakage) by an implementation-class subagent, at the implementation orchestrator's model (the binding table); no gate round |
 | The cap (three rounds) is reached | no further round for that gate, whatever later changes; every later change is listed in the PR as ungated with its scoped re-review; a change that touches a ruling goes to counsel; the whole-branch review rules on the wave if it has not yet run |
 | A post-cap fix wave applies a scoped re-review's findings as the review worded them | one confirmation pass by a subagent of the review's class, each fix checked against the review's wording — not a fresh re-review; the pass's own items are applied without a further pass and listed in its row (the cap row's counsel clause still governs one that touches a ruling); a fix the pass finds not applied as worded is redone and confirmed again on that fix alone; the gate's record closes with the pass |
 | A tool round returns neither a finding nor a verdict (refused at launch, killed before any finding, wedged at start) | not a round: cancelled and replaced by one reviewer-seat round in gate mode, which counts once it returns a finding or a verdict; the tool round's captured messages are judged as findings |
-| A seat round in gate mode returns nothing (dies mid-run) | not a round: dispatched once more; dying again, an implementation session gives the package to the stand-in (provisional, listed in the PR) and a planning session waits for the seat; the stand-in returning nothing ends the ladder — the session stops and flags the round as the owner's |
+| A seat round in gate mode returns nothing (dies mid-run) | not a round: dispatched once more; dying again, an implementation session gives the package to the stand-in (provisional, listed in the PR) and a planning session waits for the seat; the stand-in returning nothing ends the ladder (the ladder-end row, below) |
 | A round returned findings and died before its verdict | a round: its findings are judged; the verdict is recorded as absent |
 | The gate's tool is unavailable (quota, outage) | the reviewer seat in gate mode runs the round, which counts; the owner is told |
 | A seat's bound model is unavailable at run time | its stand-in (the binding table) with the same package, the ruling provisional and listed in the PR; in a planning session, planning waits |
-| The stand-in is unavailable too, or is the model that failed | the ladder ends: the session stops and flags the round as the owner's, in its ledger and last message, and in a PR once cut; nothing is ruled in its place |
+| The stand-in is unavailable too, or is the model that failed | the ladder ends: the session stops the round and flags it as the owner's, in its ledger and last message; a planning session waits for the owner, and an implementation session lists the round in its PR among what no seat reviewed; nothing is ruled in its place |
 | The owner waives the cap for a named round | recorded in the decision log; the round runs and counts |
 
 A gate's record is **closed** when no round is owed and either its last round approved or every finding of that
@@ -440,8 +448,9 @@ pinned.
 
 - **A written package.** The question or charter, the evidence paths, what has been ruled out, the rulings at stake
   (the skeletons: [docs/skeletons/counsel-package.md](skeletons/counsel-package.md),
-  [docs/skeletons/reviewer-package.md](skeletons/reviewer-package.md)). Seats have tools: they read the repository and
-  run their own checks rather than trusting the package.
+  [docs/skeletons/reviewer-package.md](skeletons/reviewer-package.md); a round in gate mode takes the gate's,
+  [docs/skeletons/gate-focus.md](skeletons/gate-focus.md)). Seats have tools: they read the repository and run their
+  own checks rather than trusting the package.
 - **Full budget, or skipped.** A seat is never briefed to economise.
 - **Fresh context.** Every call starts from its package. No seat agent is continued from an earlier call: a resumed
   agent re-reads everything it has seen.
@@ -454,6 +463,10 @@ pinned.
 
 ### Counsel triggers
 
+Trigger 1 is the implementation session's: a planning session rules on its gate's findings by stage 4 (§II), its
+dismissals listed in the planning PR among the rulings made in the owner's place. The other triggers and the cap row's
+counsel clause bind both session classes.
+
 **The three-tier rule.** The orchestrator rules alone on what data settles: a value or fact readable from a committed
 file, a committed artefact or a certified reference, under a ruling that already says which source wins (a reviewer's
 claim against a committed artefact is not a second source: the artefact settles it); and on a question the plan leaves
@@ -461,11 +474,13 @@ open when no later task in the item builds on the answer. Both kinds are recorde
 reviewer seat at stage 6. Each of the following goes to counsel when it happens, and the ruling is recorded as
 counsel's. Scope and anchors are the owner's (trigger 6).
 
-1. A gate finding no stage-6 seat will see — a re-gate after the whole-branch review, a replacement round — when data
-   does not settle it or when the orchestrator would dismiss it at medium severity or higher (the gate tool's scale;
-   Important on the seats' Critical, Important and Minor scale). The final gate's findings before the seats go into
-   their package with the orchestrator's proposed rulings. A task review's finding belongs to the SDD inner loop, not
-   to this trigger.
+1. A gate finding no stage-6 seat will see — a re-gate after the whole-branch review, or any gate round when the
+   stage-6 seats cannot run — when data does not settle it or when the orchestrator would dismiss it at medium severity
+   or higher (the gate tool's scale; Important on the seats' Critical, Important and Minor scale). For this trigger a
+   round the reviewer seat or its stand-in runs in the tool's place, whether the tool died in the round or is
+   unavailable for the session, is the tool's round. While the seats can run, the final gate's findings go into their
+   package with the orchestrator's proposed rulings. A task review's finding belongs to the SDD inner loop, not to this
+   trigger.
 2. A report or review that contradicts a recorded ruling and data does not settle it; or a question the plan leaves
    open, when the answer sets an interface, a pinned fact, a semantic rule or an acceptance criterion that a later task
    in the item builds on.
@@ -498,12 +513,12 @@ is listed, not reviewed.
 
 ### The cap
 
-At most three rounds per gate, counting the gate tool's rounds and their replacement seat rounds on that gate together;
-counsel calls and the whole-branch review do not count. Which rounds count, what replaces a dead one and what follows
-the cap are [the gate transitions](#the-gate-transitions). A start is wedged when the job logs no task thread within
-about four minutes; a healthy run logs it within a second. Past the cap the orchestrator records each change, the
-verification it ran and each finding's status in the decision log, and the PR lists anything still open as the
-owner's.
+At most three rounds per gate, counting the gate tool's rounds and the rounds that replace them, a seat's or its
+stand-in's, on that gate together; counsel calls and the whole-branch review do not count. Which rounds count, what
+replaces a dead one and what follows the cap are [the gate transitions](#the-gate-transitions). A start is wedged when
+the job logs no task thread within about four minutes; a healthy run logs it within a second. Past the cap the
+orchestrator records each change, the verification it ran and each finding's status in the decision log, and the PR
+lists anything still open as the owner's.
 
 ### Dispatch
 
@@ -546,7 +561,8 @@ without checking it. Recheck at every model release: a release moves both the ca
 
 The boot files and the design headers have word and line budgets, enforced by one fast check,
 `{{INTERPRETER}} -I tools/doc_budgets.py check` over [docs/doc-budgets.json](doc-budgets.json) (`init` writes the baselines for a fresh
-repository; [tests/docs/test_doc_budgets.py](../tests/docs/test_doc_budgets.py) wraps the check for a Python host). The same check holds the no-SHA rule at
+repository; [tests/docs/test_doc_budgets.py](../tests/docs/test_doc_budgets.py) wraps the check for a host whose suite
+runs pytest). The same check holds the no-SHA rule at
 status sites, that no id a design's Active obligations cites lives only in its companion log, and that every relative
 link in CLAUDE.md, AGENTS.md, README.md, the seat charters and `docs/` resolves to a file or a directory — links inside
 fenced code ignored, and the dated plans and handoffs held to a pinned list of their known dead links, so that a new one

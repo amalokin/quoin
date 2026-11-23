@@ -2,6 +2,84 @@
 
 One `## <version>` heading per release, newest first, each entry in the pack's own terms.
 
+## v0.2.0
+
+- `mechanics/`, a page for each of the sixteen mechanics the index lists, every page in one shape: **What**, one
+  paragraph; **Why**, the reason the mechanic exists, with the incident that paid for it where there was one; **Files**,
+  bullets that each open with a link to a path of `starter/` and say what it holds; **Depends on**, the other mechanics
+  and the tools the mechanic needs, a `later` row that a `first` one needs included; **Variants**, the default first and
+  then the common alternatives; and **Grafting**, the numbered steps that add the mechanic to a repository that already
+  has conventions. The last step, "Entering later", says which text of the contract a repository that takes the
+  mechanic after the rest keeps out until then, and gives the `git grep` that finds the other sites. A page describes
+  the mechanic and cites the contract's section for its rule; it carries no date and names no model. The starter and
+  the two guides change in a few places as well, which the last three bullets of this entry list for a repository that
+  took v0.1.0.
+- `mechanics/README.md`, the index: each row's name is now a link to its page, its opening paragraph describes the
+  pages where it had said they were to come, and the description of `model-policy-and-seats` no longer repeats the
+  contract's counts of session classes and seats and says that the seats are read-only subagents pinned in their own
+  files. `README.md`'s map line for `mechanics/` reads "a page for each", and the fusion-session prompt in `ADOPTING.md`
+  tells the session to read the page of each mechanic it takes.
+- The pack's tests now hold the pages. Each of the sixteen mechanics has its page, checked from the list of the sixteen
+  names and not from the pages found, so that a page that goes missing fails on its own, and so does a page that is no
+  mechanic's. A page opens with its title, the mechanic's name in words, and has the six sections in order; a What of
+  one paragraph of prose; Files that are bullets, each opening with a link whose text is the path from the pack's root
+  and whose target is the same path from the page, to a path that exists under `starter/`, followed by what it holds;
+  Variants whose first bullet is the default; and a Grafting that is a numbered list of at least two steps, the last the
+  "Entering later" step. A page has no date (an ISO date, or a month with its year, wrapped or not) and no model's name;
+  every link of it that names an anchor reaches a heading; it cites the contract, by a `§` or by a link with an anchor,
+  and every `§` it writes names a core section of it; and the index links it. The index holds a row for each of the
+  sixteen names, in order, the name as code in a link to its page, and neither the index nor a page names a mechanic as
+  code without the link.
+- `starter/docs/process.md`, the contract: each change is a clause or a sentence and no heading moves, so a repository
+  that took v0.1.0 can carry them across one by one. The hard stop's list adds what a planning PR also carries: the
+  design's Active obligations that it opens or closes, the design's series' rows in the id registry, and the roadmap
+  entry's Design line linking the plan, to which stage 7 adds the report; stage 7 also says that until the PR is open
+  its status sites, the plan's index row and the banners carry the lower-case placeholder `#n`, which the commit that
+  writes the number fills, and that a `git grep` finds one left. The companion-log rule says who moves a closed wave's
+  review records: the PR whose merge closes the wave hands the move on in Active obligations, and the next PR that
+  touches the design makes it. The Counsel triggers' lead-in says that trigger 1 is the implementation session's, a
+  planning session ruling on its gate's findings by stage 4 and listing its dismissals in its PR, and that the other
+  triggers and the cap row's counsel clause bind both session classes; trigger 1 says which gate rounds it means, a
+  re-gate after the whole-branch review or any round when the stage-6 seats cannot run, and that a round the reviewer
+  seat or its stand-in runs in the tool's place is the tool's round. In the gate transitions the first row says that a
+  finding left for later is dismissed for the round, its destination named, and the Judging bullet points at it; a
+  scoped re-review says what it receives and what it returns; and the end of the ladder says that the session stops the
+  round and flags it as the owner's, a planning session then waiting for the owner and an implementation session listing
+  the round in its PR among what no seat reviewed, while the row for a stand-in that returns nothing points at it. The
+  cap counts the rounds that replace the tool's, a seat's or its stand-in's; the rules for a seat call name the gate's
+  package for a round in gate mode; and the wrapper test of the document check is for a host whose suite runs pytest.
+- The starter's other files that change. `docs/id-registry.md`: the R row's pattern matches an item key that has a
+  hyphen, a ticket's `ABC-123` as in `R-ABC-123-4`, and its note says the key is written whole; the Q row's note says
+  how a later design registers its series, with the same letter in a row of its own that names the design and the
+  collision written in the Collisions section. `.claude/agents/reviewer.md`: the description names gate mode beside the
+  whole-branch review, the Gate mode section says that a gate round's findings are not triaged *fix before merge* or
+  *can wait* and cites the gate transitions for the orchestrator's ruling on each, and the sixth item of its cover says
+  that the placeholder for the PR's number is not a finding at the review. `docs/runbooks/literature-search.md` writes
+  its queue marker as `[awaiting #N]` and `REQUESTS.md #N`, in capitals, so that `#n` in lower case is the placeholder
+  of a PR's number alone. `tools/doc_budgets.py` and `tests/docs/test_doc_budgets.py` change in their docstrings alone,
+  with no change of behaviour: the first says a new design's row in `design_headers` names its first PR in
+  `target_from`, the second that the test is for a host whose suite runs pytest. The planning-session and
+  implementation-session kickoffs in `docs/skeletons/` list what the contract now lists for the planning PR and for
+  stage 7.
+- `ADOPTING.md` and `SETUP.md`, and the pages of `mechanics/` that say the same. The reconciliation checklist says its
+  second column cites the pack's files and is copied as the pack's, and its Budgets cell names the Budgets note and its
+  privacy cell says that §III is where the survey is taken. Step 6 says `/model` is the owner's to type: a session that
+  does the adoption asks the owner, in its one batch of questions, whether the account offers every default, and the
+  shipped binding stands until the answer, the ask listed in the pull request. The fusion prompt's fourth step says that
+  where the owner names the first roadmap entry the adoption is a standing decision of the roadmap, and the design's
+  header says it is the adoption, with no item. Until the adoption's pull request is open, path A's Status line and the
+  status sites of the fusion prompt carry the placeholder `#n` for its number. The layout note says what the
+  Active-obligations path is rewritten to, lists the docstrings that name the designs folder, and says that the flat
+  alternative moves designs and reports alone, so plans and handoffs keep their folders and their pin unless the host
+  moves them and rewrites `RECORD_DIRS`; step 7 follows it. `SETUP.md` says the binding table writes aliases, not full
+  names, that only the owner can type `/model`, and that the wrapper test, with the import setup of `tests/conftest.py`,
+  serves a host whose suite runs pytest, and it cites the worktree runbook's sections by their titles, as
+  `subagent-driven-development` does. `one-home-per-fact` says the wrapper test is for a pytest suite, and its Grafting
+  copies the wrapper test with `tests/conftest.py`'s import setup and sets each file's root count to the host's layout;
+  `working-with-the-owner` and `the-small-change-lane` say that the host's pull request template file is left as it is,
+  the host's copy of the description skeleton nesting its sections inside the template's headings, and
+  `model-policy-and-seats` names the owner's `/model`.
+
 ## v0.1.0
 
 - `README.md` (what quoin is, the map and the two paths), `LICENSE` (MIT), this changelog, and `tests/test_pack.py`, the

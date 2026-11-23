@@ -32,9 +32,9 @@ budgeted files: exit 2.
 
 A design's row in ``design_headers`` is written by hand in the design's first PR (``init``
 writes one for each design already on disk): ``baseline_words`` is the header's measured
-words, ``target_from`` names when the row is held to the header budget (``init`` writes
-``adoption``; the check requires a string and reads no more), and ``active`` is true from
-that first PR.
+words, ``target_from`` names when the row is held to the header budget (a new design's row
+names its first PR there, as ``init`` writes ``adoption`` for the designs already on disk;
+the check requires a string and reads no more), and ``active`` is true from that first PR.
 
 Stdlib only, Python 3.9 or later, so it runs under ``-I``. The counting rules are
 process.md's §Budgets: words and tokens are whitespace-split tokens; the H1 block is the

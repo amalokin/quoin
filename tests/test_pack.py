@@ -265,7 +265,8 @@ DEGRADE_ROWS = 4
 DEGRADE_PIECES = ("codex", "superpowers", "uv")
 
 # The index of the mechanics path B picks from: a table of three columns with a row for each mechanic, in this order,
-# its name as code and not a link (the pages are to come), and the third column one of three values.
+# its name as code in a link to its page, [`name`](name.md), which INDEX_CELL reads, and the third column one of three
+# values.
 MECHANICS_INDEX = PACK / "mechanics" / "README.md"
 INDEX_HEADER = ["Mechanic", "One line", "Path B"]
 PATH_B = {"first", "later", "measurement only"}
@@ -287,6 +288,35 @@ MECHANICS = [
     "evidence-rules",
     "the-small-change-lane",
 ]
+INDEX_CELL = re.compile(r"\[`([^`]+)`\]\([^)]*\)")
+NAME_SPAN = re.compile(r"`([a-z][a-z-]*)`")
+
+# The pages of the mechanics, one shape for all sixteen. A page is mechanics/<name>.md. It opens with its title, the
+# mechanic's name in words, and its second-level headings are PAGE_SECTIONS, exact and in order. Its Files are bullets
+# that open with a link, the path from the pack root as the text and the same path from the page as the target, to a
+# path of the starter, and say what that file holds; its Variants open with the default, DEFAULT_VARIANT, before the
+# alternatives; its Grafting is a numbered list whose last step, ENTERING_LATER, says which text of the contract a host
+# that takes the mechanic later keeps out until then, and where. A page carries no date and names no model, and it cites
+# the contract by section instead of copying its rules. Every mechanic of MECHANICS has its page: the checks over the
+# pages found would pass over a missing one, so its absence is a check of its own.
+MECHANICS_DIR = PACK / "mechanics"
+PAGE_SECTIONS = ["## What", "## Why", "## Files", "## Depends on", "## Variants", "## Grafting"]
+FILES_BULLET = re.compile(r"- \[([^\]]+)\]\(([^)\s]+)\)")
+STEP = re.compile(r"(\d+)\. ")
+ENTERING_LATER = re.compile(r"\d+\. \*\*Entering later\.\*\* ")
+DEFAULT_VARIANT = "- **The default.** "
+# A date in either form a page might give one: 2000-01-31, or a month's name with a year, which a wrapped page may break
+# over two lines (GAP). A model's name in a page's prose is its own check, since MODEL_ID sees an id or a backticked
+# alias only.
+MONTHS = "January|February|March|April|May|June|July|August|September|October|November|December"
+GAP = r"(?:[ \t]+|[ \t]*\n[ \t]*)"
+ISO_DATE = re.compile(r"\b\d{4}-\d{2}-\d{2}\b")
+MONTH_YEAR = re.compile(
+    rf"\b(?:{MONTHS}|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sept?|Oct|Nov|Dec)\.?{GAP}"
+    rf"(?:\d{{1,2}}(?:st|nd|rd|th)?,?{GAP})?\d{{4}}\b"
+    rf"|\b\d{{1,2}}{GAP}(?:{MONTHS}){GAP}\d{{4}}\b"
+)
+MODEL_WORD = re.compile(r"\b(?:fable|opus|sonnet|haiku)\b", re.IGNORECASE)
 
 # The path-B host, the repository a fusion session is rehearsed on (ADOPTING.md, Path B): a small service whose
 # conventions differ from the starter's defaults on purpose. It is a repository in miniature, with a unittest suite and
@@ -825,6 +855,117 @@ def skeleton_content_problems(text: str, *, kickoff: bool = False) -> list[str]:
     return problems
 
 
+def mechanics_pages() -> list[Path]:
+    """Every page under mechanics/, the index excepted, in path order."""
+    return sorted(path for path in MECHANICS_DIR.rglob("*.md") if path != MECHANICS_INDEX)
+
+
+def page_name(page: Path) -> str:
+    """The mechanic a page is: its path under mechanics/, without the suffix."""
+    return page.relative_to(MECHANICS_DIR).with_suffix("").as_posix()
+
+
+def index_name(cell: str) -> str | None:
+    """The mechanic a first cell of the index names, in the form it takes, [`name`](name.md), or None for other text."""
+    match = INDEX_CELL.fullmatch(cell)
+    return match.group(1) if match else None
+
+
+def unlinked_mentions(text: str) -> list[str]:
+    """`<line>: <name>` for each mechanic that `text` names in a code span, outside fenced code, other than as the text
+    of a link to its page, [`name`](name.md): a name left as code points at nothing."""
+    found = []
+    for index, line in unfenced(text.splitlines()):
+        for span in NAME_SPAN.finditer(line):
+            name = span.group(1)
+            linked = line[: span.start()].endswith("[") and line[span.end() :].startswith(f"]({name}.md")
+            if name in MECHANICS and not linked:
+                found.append(f"{index + 1}: {name}")
+    return found
+
+
+def mechanics_page_problems(page: Path) -> list[str]:
+    """What is wrong with one page of the mechanics against the page interface, one line each: a name that is no
+    mechanic's; a title that is not the one `# ` line, first, the name in words; second-level headings other than
+    PAGE_SECTIONS; a What that is not one paragraph; Files that are not bullets, each opening with a link whose text is
+    the path from the pack root and whose target is the same path from the page, to a path that exists under starter/,
+    and saying what that file holds; Variants whose first bullet is not the default, DEFAULT_VARIANT, so that a reader
+    sees what the starter ships before the alternatives; a Grafting that is not a numbered list ending in the
+    ENTERING_LATER step; a date, wrapped or not; a model's name; a link whose anchor names no heading; no citation of
+    process.md, by a `§` or by a link with an anchor, or a `§` citation of what is no core section; and an index that
+    does not link the page. The section checks run only once the headings are right, since they read each section by
+    it."""
+    name = page_name(page)
+    text = page.read_text(encoding="utf-8")
+    lines = text.splitlines()
+    problems = []
+    if name not in MECHANICS:
+        problems.append(f"'{name}' is no mechanic of the index")
+    titles = [line for _, line in unfenced(lines) if line.startswith("# ")]
+    if len(titles) != 1 or lines[:1] != titles:
+        problems.append("the page needs one '# ' title, and it on the first line")
+    elif "-".join(titles[0][2:].lower().split()) not in (name, f"the-{name}"):
+        problems.append(f"the title '{titles[0][2:]}' is not the name '{name}' in words")
+    headings = [heading for heading in section_headings(text) if heading.startswith("## ")]
+    if headings != PAGE_SECTIONS:
+        problems.append(f"the '## ' headings are {headings}, not {PAGE_SECTIONS}")
+    else:
+        what = "\n".join(line.rstrip() for _, line in section_body(text, "## What")).strip()
+        if not what or "\n\n" in what or what.startswith(("- ", "|", "#", "1. ", *FENCES)):
+            problems.append("What is not one paragraph of prose")
+        files = [line for _, line in section_body(text, "## Files")]
+        bullets = top_level_bullets(files)
+        if not bullets or any(line.strip() and not line.startswith(("- ", " ")) for line in files):
+            problems.append("Files is not a bullet list")
+        for bullet in bullets:
+            opening = FILES_BULLET.match(bullet)
+            if opening is None:
+                problems.append(f"a Files bullet does not open with a link: '{bullet[:50]}'")
+                continue
+            label, target = opening.groups()
+            where = (page.parent / target).resolve()
+            under = STARTER.resolve() in where.parents and where.exists()
+            if target != f"../{label}":
+                problems.append(f"the Files link '{label}' does not target that path from the page: '{target}'")
+            elif not under or not spelled_as_written(where, PACK.resolve()):
+                problems.append(f"the Files link '{label}' is no path under starter/")
+            if not bullet[opening.end() :].strip(" \t\n—–-:"):
+                problems.append(f"the Files bullet for '{label}' does not say what that file holds")
+        variants = top_level_bullets([line for _, line in section_body(text, "## Variants")])
+        if not variants or not " ".join(variants[0].split()).startswith(DEFAULT_VARIANT):
+            problems.append(f"the first Variants bullet does not open with '{DEFAULT_VARIANT.strip()}'")
+        grafting = [line.rstrip() for _, line in section_body(text, "## Grafting")]
+        steps = [line for line in grafting if STEP.match(line)]
+        numbers = [int(STEP.match(line).group(1)) for line in steps]
+        if len(steps) < 2 or numbers != list(range(1, len(steps) + 1)):
+            problems.append(f"Grafting is not a numbered list of at least two steps: {numbers}")
+        elif any(line.strip() and not STEP.match(line) and not line.startswith(" ") for line in grafting):
+            problems.append("Grafting holds text outside its numbered steps")
+        elif not ENTERING_LATER.match(steps[-1]):
+            problems.append("Grafting's last step is not the 'Entering later' step")
+    for pattern in (ISO_DATE, MONTH_YEAR):
+        for match in pattern.finditer(text):
+            problems.append(f"line {line_of(text, match.start())}: a date, '{' '.join(match.group(0).split())}'")
+    for number, line in enumerate(lines, 1):
+        problems += [f"line {number}: a model's name, '{match.group(0)}'" for match in MODEL_WORD.finditer(line)]
+    for number, target in markdown_links(text):
+        path, _, anchor = target.partition("#")
+        if SCHEME.match(target) or not anchor:
+            continue
+        where = page if not path else (page.parent / path).resolve()
+        if where.suffix == ".md" and where.is_file():
+            if anchor not in heading_slugs(where.read_text(encoding="utf-8")):
+                problems.append(f"line {number}: '{target}' names no heading")
+    cited = section_citations(text)
+    if not cited and not any("process.md#" in target for _, target in markdown_links(text)):
+        problems.append("it cites no section of process.md, by a '§' or by a link with an anchor")
+    names = core_section_names()
+    problems += [f"it cites '{cite}', no core section of process.md" for cite in cited if cite not in names]
+    if f"{name}.md" not in {target for _, target in markdown_links(MECHANICS_INDEX.read_text(encoding="utf-8"))}:
+        problems.append("the index does not link the page")
+    return problems
+
+
 def doc_budgets():
     """The starter's document check, loaded from its path."""
     spec = importlib.util.spec_from_file_location("starter_doc_budgets", DOC_BUDGETS)
@@ -1338,15 +1479,17 @@ def test_setup_has_the_degrade_table():
 
 def test_mechanics_index_has_sixteen_rows():
     """mechanics/README.md is the index of the mechanics path B picks from: a table headed INDEX_HEADER with a row for
-    each name of MECHANICS, in that order, the name as code and not a link (the pages are to come), a description that
-    cites a core section of the contract with a `§`, and a third cell that is one of PATH_B."""
+    each name of MECHANICS, in that order, the name as code in a link to its page (that the link goes to the page is
+    test_mechanics_index_links_every_page's), a description that cites a core section of the contract with a `§`, and a
+    third cell that is one of PATH_B."""
     assert MECHANICS_INDEX.is_file(), "mechanics/README.md is missing"
     rows = table_rows(MECHANICS_INDEX.read_text(encoding="utf-8").splitlines())
     assert rows and rows[0] == INDEX_HEADER, f"the index's header is {rows[:1]}, not {INDEX_HEADER}"
     assert len(rows) > 1 and all(cell and set(cell) <= set("-:") for cell in rows[1]), "the header has no separator row"
     data = rows[2:]
     assert len(data) == len(MECHANICS), f"the index has {len(data)} rows, not {len(MECHANICS)}"
-    assert [row[0] for row in data] == [f"`{name}`" for name in MECHANICS]
+    read = [index_name(row[0]) for row in data]
+    assert read == MECHANICS, f"the first cells read [`name`](name.md) for the mechanics in order, not {read}"
     assert all(len(row) == len(INDEX_HEADER) and all(row) for row in data), "a row has a missing or an empty cell"
     outside = [f"{row[0]}: '{row[2]}'" for row in data if row[2] not in PATH_B]
     assert not outside, f"a Path B cell outside {sorted(PATH_B)}: {outside}"
@@ -1358,6 +1501,41 @@ def test_mechanics_index_has_sixteen_rows():
             problems.append(f"{row[0]} cites no section of process.md with '§'")
         problems += [f"{row[0]} cites '{name}', no core section of process.md" for name in cited if name not in names]
     assert not problems, "the index's descriptions cite the contract by section:\n" + "\n".join(problems)
+
+
+def test_mechanics_pages_have_the_shape():
+    """The menu is complete and every page is in the one shape. Each of the sixteen mechanics has its page,
+    mechanics/<name>.md, which is checked by the list of MECHANICS and not by the pages found, since a page that went
+    missing leaves nothing to check. Every page under mechanics/ but the index is the page of one of the sixteen
+    (mechanics_page_problems): the title, the six sections in order, a What of one paragraph, Files that are bullets
+    opening with a link to a path of the starter and saying what it holds, Variants that open with the default, a
+    Grafting of numbered steps that ends with what to keep out until the mechanic is taken, no date, no model's name,
+    anchors that name headings, citations of the contract that name core sections, and a link to it from the index."""
+    pages = mechanics_pages()
+    found = [page_name(page) for page in pages]
+    problems = [f"mechanics/{name}.md: the page is missing" for name in MECHANICS if name not in found]
+    for page in pages:
+        problems += [f"{relative(page)}: {problem}" for problem in mechanics_page_problems(page)]
+    assert not problems, "the mechanics pages against the page interface:\n" + "\n".join(problems)
+
+
+def test_mechanics_index_links_every_page():
+    """A mechanic is named as a link to its page, wherever the pack names it. The index has, for each mechanic of
+    MECHANICS, a row whose first cell is [`name`](name.md); and neither the index nor a page names a mechanic in a code
+    span without linking it, since a name left as code points at nothing. That each page exists is
+    test_mechanics_pages_have_the_shape's, and that a link reaches a file is
+    test_relative_links_resolve_inside_the_pack's."""
+    firsts = [row[0] for row in table_rows(MECHANICS_INDEX.read_text(encoding="utf-8").splitlines())[2:]]
+    problems = []
+    for name in MECHANICS:
+        want = f"[`{name}`]({name}.md)"
+        if want not in firsts:
+            problems.append(f"the index has no row that opens with {want}")
+    for path in [MECHANICS_INDEX, *mechanics_pages()]:
+        text = path.read_text(encoding="utf-8")
+        for found in unlinked_mentions(text):
+            problems.append(f"{relative(path)}:{found}: a mechanic named as code and not linked")
+    assert not problems, "the mechanics named against their pages:\n" + "\n".join(problems)
 
 
 def test_setup_citations_name_core_sections_of_the_contract():

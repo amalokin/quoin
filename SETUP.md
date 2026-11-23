@@ -67,7 +67,7 @@ Node.js's.
 ### 4. `gh`, authenticated
 
 **For.** GitHub is the default forge and `gh` the pack's pull-request tool (process.md §Conventions);
-[ADOPTING.md](ADOPTING.md) step 11 and the worktree runbook's section 6 name it.
+[ADOPTING.md](ADOPTING.md) step 11 and the worktree runbook's "Finishing a PR from another session" name it.
 
 **Check.** `gh auth status` shows the account signed in to each GitHub host, and exits 1 when one has an authentication
 problem (`gh auth status --help`); `gh auth login` signs in.
@@ -86,10 +86,10 @@ trees. The loop also uses `git worktree add` and `git worktree remove`.
 Python, run as `python3 -I tools/<tool>.py …` (`-I` is Python's isolated mode, which `python3 --help` lists), and they
 need Python 3.9 or later whatever language the project is written in. A host whose own suite is not Python runs the
 document check from its CI by the command, `python3 -I tools/doc_budgets.py check`, which exits 0 when the documents
-are within their budgets; the starter's wrapper test, `tests/docs/test_doc_budgets.py`, serves a host whose suite is
-Python (process.md §Budgets). The starter's own tests, the tools' and that wrapper, are pytest tests: a Python host's
-fast suite runs them with pytest, and a host whose suite is not pytest installs pytest for them or, as above, runs the
-document check by its command from CI.
+are within their budgets; the starter's wrapper test, `tests/docs/test_doc_budgets.py`, with the import setup of
+`tests/conftest.py`, serves a host whose suite runs pytest (process.md §Budgets). The starter's own tests, the tools'
+and that wrapper, are pytest tests: a Python host's fast suite runs them with pytest, and a host whose suite is not
+pytest installs pytest for them or, as above, runs the document check by its command from CI.
 
 **Check.** `python3 --version` prints the version, and this exits 0 when it is new enough:
 
@@ -190,10 +190,10 @@ adoption (process.md §Model policy, The binding table; [ADOPTING.md](ADOPTING.m
 the first thing to know.
 
 **Check.** There is no `claude` command that lists models: the command list of `claude --help` has none. In a session,
-`/model` opens the picker, which shows what the account offers; an organisation can narrow it with the `availableModels`
-setting of its managed settings, so what the picker shows is what counts. `--model` takes an alias for a family's latest
-model or a model's full name (`claude --help`), and the binding table writes full names. Compare the picker with the
-defaults the binding table names.
+`/model` opens the picker, which shows what the account offers; only the owner can type it, since a session cannot type
+a slash command. An organisation can narrow the list with the `availableModels` setting of its managed settings, so what
+the picker shows is what counts. `--model` takes an alias for a family's latest model or a model's full name
+(`claude --help`), and the binding table writes aliases. Compare the picker with the defaults the binding table names.
 
 ## What degrades without each piece
 
@@ -204,7 +204,7 @@ A model named here is a default of the binding table.
 |---|---|---|
 | The Superpowers plugin (item 2) | The loop is unchanged, with its gates and seats. The planning session writes the plan by hand, laid out as [the plan skeleton](starter/docs/skeletons/plan.md); the implementation session carries it out itself, task by task, in the shape of Superpowers' `executing-plans` skill, with no per-task subagents, and keeps the ledger by hand at the same path. | process.md §II, stages 3 and 5 |
 | The Codex plugin, its CLI logged in, or Node.js (items 2 and 3) | The loop is unchanged. The gate's tool is unavailable, so the reviewer seat in gate mode runs each gate round. | process.md §Adversarial review protocol, The gate transitions |
-| `gh`, or not signed in to it (item 4) | Nothing in the loop needs the tool: pull requests are opened, read and merged on the forge's own page. The two commands of the pack that name it are a convenience (ADOPTING.md step 11; the worktree runbook, section 6). | process.md §Conventions |
+| `gh`, or not signed in to it (item 4) | Nothing in the loop needs the tool: pull requests are opened, read and merged on the forge's own page. The two commands of the pack that name it are a convenience (ADOPTING.md step 11; the worktree runbook, "Finishing a PR from another session"). | process.md §Conventions |
 | Python 3.9 or later (item 6) | The document check, the literature tool and the plan-blocks tool do not run. A host leaves the budgets off (the checklist's row on budgets in ADOPTING.md). Nothing else of the pack runs on Python. | process.md §Budgets |
 | `uv` (item 7) | The arXiv MCP server is off, and a survey session reads filed PDFs with the Read tool, which is the canonical way to read a paper in any case. The literature tool runs on Python alone. | docs/runbooks/literature-search.md, section 1 |
 | The effort pin at launch (item 8) | The orchestrator runs at the effort Claude Code starts with, not the binding table's max; the owner's `/effort` check at the start of a session is what catches it. | process.md §Model policy, The binding table |

@@ -38,7 +38,7 @@ With every change committed, stage 7's records below included but for the gate's
 
 ## The PR (stage 7)
 
-Before the final review, write stage 7's records: replace, never append to, the roadmap's status paragraph, the design header's status and CLAUDE.md's Status, update the design's Active obligations, and record what the merge hands on in the report's open items, the report laid out as `docs/skeletons/report.md`; after the review, add the gate's rows and the seat log to the design's decision log and the minors its triage defers to the report's open items, cut the PR for the owner's review, its description laid out as `docs/skeletons/pr-description.md`, and write the PR's number by one more commit at the status sites, in the plans index's PR cell and in the plan's and the report's banners (process.md §II, stages 6 and 7).
+Before the final review, write stage 7's records: replace, never append to, the roadmap's status paragraph, the design header's status and CLAUDE.md's Status, update the design's Active obligations, link the report on the roadmap entry's Design line beside the plan's, and record what the merge hands on in the report's open items, the report laid out as `docs/skeletons/report.md`; after the review, add the gate's rows and the seat log to the design's decision log and the minors its triage defers to the report's open items, cut the PR for the owner's review, its description laid out as `docs/skeletons/pr-description.md`, and write the PR's number by one more commit at the status sites, in the plans index's PR cell and in the plan's and the report's banners (process.md §II, stages 6 and 7).
 
 ## Post-merge (stage 8)
 

@@ -15,7 +15,7 @@ quoin/
 ├── SETUP.md                  the environment: Claude Code, the plugins, the tools, and what degrades without each
 ├── ADOPTING.md               path A, path B, the fusion-session prompt and the reconciliation checklist
 ├── CHANGELOG.md              one entry per release
-├── mechanics/                README.md, the index of the sixteen mechanics path B picks from; the pages are to come
+├── mechanics/                README.md, the index of the sixteen mechanics path B picks from, and a page for each
 ├── starter/                  the drop-in tree path A copies whole
 │   ├── CLAUDE.md  AGENTS.md  README.md  .gitignore
 │   ├── .claude/agents/counsel.md  reviewer.md

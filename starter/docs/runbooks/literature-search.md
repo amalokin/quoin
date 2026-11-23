@@ -100,9 +100,9 @@ the papers outgrow one index table or a second person joins.
   "closed" unestablished (its 404 is an answer and queues): `error: not queued — Unpaywall could not be asked (…);
   retry before queueing`, exit 1, nothing written. The "Why" is the claim the paper would settle, so the owner can
   skip rows an open source already settled. The owner fulfils the queue in one sitting; until then the citing text
-  marks the gap `[awaiting #n]` and keeps going. The owner may drop the PDFs, under any names, into
+  marks the gap `[awaiting #N]` and keeps going. The owner may drop the PDFs, under any names, into
   `docs/papers/intake/`: the next session identifies each from its first page, files it under the row's name with its
-  §6 row (`index` does not look inside the folder), flips the status, and has every `[awaiting #n]` claim checked
+  §6 row (`index` does not look inside the folder), flips the status, and has every `[awaiting #N]` claim checked
   against the paper (a reader, then §5's verification on the changed text). A copy identical to a filed paper is
   deleted.
 - **Exit codes** (for scripts and agents): 0 ok, 1 error or index inconsistency (`check`: not ready), 2 usage, 3
@@ -123,7 +123,7 @@ the papers outgrow one index table or a second person joins.
    claim you will attribute.
 4. **Write** the findings into [literature-review.md](../reports/literature-review.md)'s standing sections, revised
    in place. Cite primary sources only, each with venue, year, DOI or arXiv id and its `docs/papers/` file or
-   `REQUESTS.md #n`.
+   `REQUESTS.md #N`.
 5. **Verify** (§5) — the survey's gate.
 6. **Watchlist and sweep log.** Add what the next sweep should check (venues, authors, arXiv categories, open
    questions) to the watchlist, and one dated row to the sweep log, both in
