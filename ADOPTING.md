@@ -63,11 +63,13 @@ instantiates the setup handoff by a second, small one once the first has merged;
    do where the environment does not offer one: rebind it at adoption, in the table and in the seat files. The seat
    files are [.claude/agents/counsel.md](starter/.claude/agents/counsel.md) and
    [reviewer.md](starter/.claude/agents/reviewer.md), whose `model` and `effort` must say what their rows say. This
-   guide names no model, since the table is the one place that does; `/model` in a Claude Code session lists what the
-   account offers, and a `git grep -n --untracked` for the default's model name lists its sites, among them rows that
-   are not a seat's, such as the planning orchestrator's, each of which stays unless the environment lacks its model
-   too. Where every default is offered, the shipped binding stands. Note a rebinding in the same first row of the
-   process log.
+   guide names no model, since the table is the one place that does. What the account offers is the owner's to read:
+   `/model` lists it, and it is a slash command that a session cannot type (SETUP.md, item 11). A session that does the
+   adoption asks the owner, in its one batch of questions, whether the account offers every default, and the shipped
+   binding stands until the answer, the ask listed in the pull request. A `git grep -n --untracked` for the default's
+   model name lists its sites, among them rows that are not a seat's, such as the planning orchestrator's, each of
+   which stays unless the environment lacks its model too. Where every default is offered, the shipped binding stands.
+   Note a rebinding in the same first row of the process log.
 
 7. **Rewrite a Conventions row where the project chooses otherwise.** process.md §Conventions gives each default, with
    an alternative beside it where it has one, and says how a row is rewritten: the choice and every site that uses it,
@@ -76,7 +78,7 @@ instantiates the setup handoff by a second, small one once the first has merged;
    forge. Record the deviation with its reason on the line below the table, where a fill comment asks for it, and in the
    first row of the process log. One consequence to know, set out in the layout note under the checklist: the document
    check finds designs and the dated records only where its layout constants say, so a flat `docs/`, as the alternative
-   has it, gets no design checks and no pin for its dated records.
+   has it, gets no design checks, and a host that moves its plans or its handoffs gets no pin for them.
 
 8. **Write the pack's version, then sweep the fill comments.** `{{QUOIN_VERSION}}` is the pack's tag and the commit it
    names, read from the clone you copied (`git -C ‹pack› describe --tags` and `git -C ‹pack› rev-parse --short HEAD`)
@@ -87,10 +89,10 @@ instantiates the setup handoff by a second, small one once the first has merged;
    comments left, ignored files skipped: answer or delete each, wrapping an answer so that no line passes the document
    check's line limit (`line_limit_chars` in `docs/doc-budgets.json`, 400 characters as shipped). `CLAUDE.md`'s Status
    states the result the merge makes true, so it says the adoption is merged ("merged" is written in the pull request,
-   since the text reaches `main` only if the pull request merges; process.md §II, stage 7), and step 10 adds the pull
-   request's number and date. The setup handoff's own, which that command leaves out, wait for step 11. Two lists the
-   check counts item by item each keep one bullet, which may say none yet: `CLAUDE.md`'s Load-bearing facts and the
-   roadmap's Parking lot.
+   since the text reaches `main` only if the pull request merges; process.md §II, stage 7), with `(PR #n)` as the
+   placeholder that step 10 replaces with the pull request's number and date. The setup handoff's own, which that
+   command leaves out, wait for step 11. Two lists the check counts item by item each keep one bullet, which may say
+   none yet: `CLAUDE.md`'s Load-bearing facts and the roadmap's Parking lot.
 
 9. **Run the document check, last before the commit,** after every other edit:
    `python3 -I tools/doc_budgets.py init --force`, then `python3 -I tools/doc_budgets.py check`. `--force` because the
@@ -107,10 +109,10 @@ instantiates the setup handoff by a second, small one once the first has merged;
 
 10. **Commit as the adoption pull request.** Commit everything on the branch (the subject in the commit style of step 7,
     `docs: adopt the quoin way of working` by default), push it and open the pull request, its description laid out as
-    [pr-description.md](starter/docs/skeletons/pr-description.md). Once it is open, add `(PR #N, YYYY-MM-DD)`, its
-    number and the day it was cut, to the `CLAUDE.md` Status line that says the adoption is merged, by one more commit
-    (process.md §II, stage 7), and run `check` again after it. The owner's review is the gate (process.md §Purpose and
-    principles).
+    [pr-description.md](starter/docs/skeletons/pr-description.md). Once it is open, replace the `(PR #n)` of the
+    `CLAUDE.md` Status line that says the adoption is merged with `(PR #N, YYYY-MM-DD)`, its number and the day it was
+    cut, by one more commit (process.md §II, stage 7), and run `check` again after it. The owner's review is the gate
+    (process.md §Purpose and principles).
 
 11. **Instantiate the research setup handoff, once the owner has merged the adoption pull request.**
     [docs/handoffs/HANDOFF-research-setup.md](starter/docs/handoffs/HANDOFF-research-setup.md) is a template whose
@@ -197,8 +199,7 @@ that in one sentence.
    templates, the code owners, the branch rules, and the existing docs with their layout. What the host has decided
    stands unless the owner says otherwise.
 2. Read the pack: `mechanics/README.md`, the index of its mechanics, and `starter/docs/process.md`, the contract they
-   come from; for each mechanic you take, read its page under `mechanics/` where the pack has one. Take mechanics,
-   never the starter whole.
+   come from; for each mechanic you take, read its page under `mechanics/`. Take mechanics, never the starter whole.
 3. Propose the reconciliation as a design doc in the host, in the house shape of `starter/docs/skeletons/design.md`,
    placed where the host keeps such documents. It decides which mechanics enter now and which later; which of the
    host's conventions win where they differ from the pack's defaults; the model binding and the gate tool as available
@@ -208,12 +209,14 @@ that in one sentence.
 4. Land the adoption by pull request, the owner's review its gate: the design doc, the host's process.md, which carries
    the scope sentence, and the files of the mechanics that enter now, laid out as the host's conventions require.
    `CLAUDE.md`, `AGENTS.md` and the process log enter with the first mechanic, and the roadmap's first entry is the
-   adoption itself unless the owner names one. Where a mechanic needs the starter's `.gitignore` entries (the ledger's
-   `.superpowers/`, the owner's prompts' `/local/` and the session worktrees' `.claude/worktrees/`), append those to
-   the host's file, creating it if the host has none, and never replace it. The host's own checks stay green, and its
-   commit style and pull request template apply. Describe the pull request in the host's template with the sections of
-   `starter/docs/skeletons/pr-description.md` inside it, listing the rulings you made in the owner's place. Once it is
-   open, write its number and date where the status sites name the adoption, by one more commit
+   adoption itself unless the owner names one; where the owner names the first entry, record the adoption as a standing
+   decision of the roadmap, and have the design's header say that it is the adoption, with no roadmap item. Where a
+   mechanic needs the starter's `.gitignore` entries (the ledger's `.superpowers/`, the owner's prompts' `/local/` and
+   the session worktrees' `.claude/worktrees/`), append those to the host's file, creating it if the host has none, and
+   never replace it. The host's own checks stay green, and its commit style and pull request template apply. Describe
+   the pull request in the host's template with the sections of `starter/docs/skeletons/pr-description.md` inside it,
+   listing the rulings you made in the owner's place. Until it is open, a status site that names the adoption carries
+   the placeholder `#n` for its number; once it is open, write its number and date there, by one more commit
    (`starter/docs/process.md` §II, stage 7), then stop: implement nothing else.
 ```
 
@@ -221,7 +224,8 @@ that in one sentence.
 
 The fusion session decides every row. The third column is empty here: the session copies the table into the host's
 design doc and writes there, for each row, the host's choice and its reason, naming the default where the host keeps it.
-The defaults cite the sections of [starter/docs/process.md](starter/docs/process.md).
+The second column cites the pack's files, the sections of [starter/docs/process.md](starter/docs/process.md) and the
+notes below, and is copied as the pack's: a citation in it is no reference into the host's own documents.
 
 | Decision | The pack's default | The host's choice |
 |---|---|---|
@@ -231,11 +235,11 @@ The defaults cite the sections of [starter/docs/process.md](starter/docs/process
 | The PR review as the owner's gate | Every change lands by feature branch and a pull request the owner reviews; nothing goes to `main` directly (process.md §Purpose and principles) |  |
 | The models available and the seats' binding | The binding table's defaults; a default the environment does not offer is rebound at adoption, in the table and the seat files (process.md §Model policy, The binding table) |  |
 | Codex's availability | The adversarial gate runs through the Codex plugin; without it the reviewer seat in gate mode runs the round (process.md §Adversarial review protocol, The gate transitions) |  |
-| Budgets on or off | On: the document check over `docs/doc-budgets.json` (process.md §Budgets; the first note below) |  |
+| Budgets on or off | On: the document check over `docs/doc-budgets.json` (process.md §Budgets; ADOPTING.md's Budgets note) |  |
 | The id registry on or off | On: `docs/id-registry.md` maps every decision series to its document and anchors (process.md §Doc taxonomy) |  |
 | The handoff threshold | About thirty minutes serial (process.md §Conventions; §Handoff economics) |  |
 | Where the ledger lives | `.superpowers/sdd/<date-slug>/`, local, gitignored and never deleted (process.md §II, stage 5; §Doc taxonomy) |  |
-| The host's own privacy rules for documents | No secrets in git and a key held by the owner; the host adds its own (AGENTS.md, Security & Configuration Tips; process.md §III) |  |
+| The host's own privacy rules for documents | No secrets in git and a key held by the owner; the host adds its own (AGENTS.md, Security & Configuration Tips; process.md §III, where the survey is taken) |  |
 
 Two notes on the rows.
 
@@ -254,9 +258,14 @@ Two notes on the rows.
 - **Layout.** The check keeps part of the layout in code, in `tools/doc_budgets.py`, and a layout choice (step 7)
   rewrites those sites with the rest: `DESIGNS` is the folder where it finds designs, the files `*-design.md` directly
   in it; `RECORD_DIRS` names the folders of the dated records, `docs/plans/` and `docs/handoffs/`; and the
-  Active-obligations check names `docs/designs/` itself, in `obligations_only_in_companion_logs`. As shipped, a flat
-  host's designs are not found: `init` writes no row for them, and the design-row rule, the header budget and the
+  Active-obligations check names `docs/designs/` itself, in `obligations_only_in_companion_logs`, a path rewritten to
+  the host's designs folder, the value `DESIGNS` holds. The docstrings that name `docs/designs/`, the module's and those
+  of `designs_on_disk` and `check_problems`, are comments, rewritten with those sites or left. As shipped, a flat host's
+  designs are not found: `init` writes no row for them, and the design-row rule, the header budget and the
   Active-obligations check do not run over them. Set to `docs`, `DESIGNS` brings the first two to them; the third stays
-  off until its own path is rewritten. A flat host's plans and handoffs are not records to the check, so none is pinned
-  and a link in one that dies fails `check` at once. While no design is found the tool prints "no design yet" on every
-  run, as it does on a flat host left as shipped; it is information, not a problem.
+  off until its own path is rewritten. The flat alternative moves designs and reports alone (process.md §Conventions):
+  the plans, handoffs, skeletons and runbooks keep their folders unless the host's conventions place them elsewhere,
+  and `RECORD_DIRS` then still finds the plans and the handoffs. A host that moves its plans or its handoffs out of
+  `docs/plans/` and `docs/handoffs/` rewrites `RECORD_DIRS`, or else none is pinned and a link in one that dies fails
+  `check` at once. While no design is found the tool prints "no design yet" on every run, as it does on a flat host left
+  as shipped; it is information, not a problem.

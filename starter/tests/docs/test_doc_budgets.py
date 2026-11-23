@@ -1,4 +1,4 @@
-"""The document check as a test, for a Python host (docs/process.md, Budgets).
+"""The document check as a test, for a host whose suite runs pytest (docs/process.md, Budgets).
 
 `tools/doc_budgets.py check` over this repository, as `python3 -I tools/doc_budgets.py check` runs it: each problem
 it finds is printed as `<path>: <message>`, and pytest shows the printed lines when the test fails.

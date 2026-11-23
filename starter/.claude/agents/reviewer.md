@@ -2,8 +2,9 @@
 name: reviewer
 description: >
   Reviewer seat (docs/process.md, Model policy). The whole-branch review at stage 6, after the
-  final codex gate has returned. Give it the review package (branch diff, plan, ledger rulings,
-  the gate's findings with the orchestrator's proposed rulings) and no model parameter.
+  final codex gate has returned, and, in gate mode, any gate round the gate's tool cannot run.
+  Give it the review package (branch diff, plan, ledger rulings, the gate's findings with the
+  orchestrator's proposed rulings), or in gate mode the gate's package, and no model parameter.
   Read-only; always runs at full budget.
 model: fable
 effort: max
@@ -42,8 +43,8 @@ seats: Rules for a seat call). This charter says what the review covers in this 
 6. **The docs in the PR.** Status lines, counts and claims at every site must match the code and
    the committed records at the branch tip and keep the rules of a status site
    (`docs/process.md` §II, stage 7; §Budgets; §Canonical and pointer sites). The PR's number is
-   absent at your review by design, since one more commit writes it once the PR is open, so its
-   absence is not a finding.
+   a placeholder at your review by design (stage 7 names it), since one more commit fills it once
+   the PR is open, so the placeholder is not a finding.
 
 ## How
 
@@ -80,6 +81,8 @@ pass (`docs/process.md` §Adversarial review protocol) — with this charter's C
 checklist, and return the gate's report: a verdict (approve, needs attention, not ready), then
 the findings by severity with file and line and the fix, then what you read and the context you
 lacked (the gate package's mandatory reads, `docs/process.md` §Adversarial review protocol, The
-gate package). The orchestrator logs and counts your round as a gate round (`docs/process.md`
-§Model policy, The cap; §Adversarial review protocol, The gate transitions). The stage-6
-whole-branch review is a separate call with its own package.
+gate package). Triage nothing: item 5's *fix before merge* and *can wait* belong to the
+whole-branch review. The orchestrator rules each finding of your round, one left for later
+included, and logs and counts the round as a gate round (`docs/process.md` §Model policy, The
+cap; §Adversarial review protocol, The gate transitions). The stage-6 whole-branch review is a
+separate call with its own package.
